@@ -33,7 +33,8 @@
 		"matklad.rust-analyzer",
 		"tamasfe.even-better-toml",
 		"serayuzgur.crates",
-		"wakatime.vscode-wakatime"
+		"wakatime.vscode-wakatime",
+		"GitHub.copilot"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
