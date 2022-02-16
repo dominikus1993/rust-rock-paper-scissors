@@ -6,11 +6,34 @@ pub enum Result {
     Lose,
 }
 
+impl Result {
+    pub fn compute_score(&self, p1s: i32, p2s: i32) -> (i32, i32) {
+        match self {
+            Result::Win => (p1s + 1, p2s),
+            Result::Lose => (p1s, p2s + 1),
+            Result::Tie => (p1s, p2s),
+        }
+    }
+}
+
 #[derive(Debug, PartialEq)]
 pub enum RPS {
     Rock,
     Paper,
     Scissors,
+}
+
+impl RPS {
+    pub fn from_str(s: &str) -> Option<RPS> {
+        let trimmed = s.trim();
+        let lower = trimmed.to_lowercase();
+        match lower.as_str() {
+            "rock" => Some(RPS::Rock),
+            "paper" => Some(RPS::Paper),
+            "scissors" => Some(RPS::Scissors),
+            _ => None,
+        }
+    }
 }
 
 pub fn result(player1: RPS, player2: RPS) -> Result {
