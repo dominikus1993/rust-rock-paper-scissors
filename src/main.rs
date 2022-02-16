@@ -1,7 +1,7 @@
 mod game;
-use game::*;
+
 fn main() {
-    let a = game::game::RPS::Rock;
+    let a = game::RPS::Rock;
     println!("My move is {:?}", a);
     let b = game::random_move();
     println!("\nOpponent move is {:?}", b);
