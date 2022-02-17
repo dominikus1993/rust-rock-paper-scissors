@@ -1,9 +1,10 @@
 mod game;
 use std::io::{stdin,stdout,Write};
 use game::*;
+
+
 fn main_game_loop() {
-    let mut human_player_score = 0;
-    let mut computer_player_score = 0;
+    let mut score = Score::new();
     loop {
         let mut s=String::new();
         println!("Choose your move: Rock, Paper, Scissors");
@@ -13,9 +14,7 @@ fn main_game_loop() {
             Some(player_1_choice) => {
                 let cpu_choice = random_move();
                 let result = result(player_1_choice, cpu_choice);
-                let (player_1_score, player_2_score) = result.compute_score(human_player_score, computer_player_score);
-                human_player_score = player_1_score;
-                computer_player_score = player_2_score;
+                score = result.compute_score(score);
                 println!("{:?}", result);
             },
             None => {
@@ -24,13 +23,9 @@ fn main_game_loop() {
             }
         }
 
-        if human_player_score == 3 || computer_player_score == 3 {
+        if score.check() {
             println!("Game over");
-            if human_player_score == 3 {
-                println!("You won!");
-            } else {
-                println!("You lost!");
-            }
+            score.print_winner();
             break;
             
         }

@@ -7,11 +7,17 @@ pub enum Result {
 }
 
 impl Result {
-    pub fn compute_score(&self, p1s: i32, p2s: i32) -> (i32, i32) {
+    pub fn compute_score(&self, score: Score) -> Score {
         match self {
-            Result::Win => (p1s + 1, p2s),
-            Result::Lose => (p1s, p2s + 1),
-            Result::Tie => (p1s, p2s),
+            Result::Win => Score{
+                player: score.player + 1,
+                ..score
+            },
+            Result::Lose => Score{
+                computer: score.computer + 1,
+                ..score
+            },
+            Result::Tie => score,
         }
     }
 }
@@ -53,6 +59,36 @@ pub fn random_move() -> RPS {
         0 => RPS::Rock,
         1 => RPS::Paper,
         _ => RPS::Scissors,
+    }
+}
+
+pub struct Score {
+    pub player: u32,
+    pub computer: u32,
+
+}
+
+impl Score {
+    pub fn new() -> Score {
+        Score {
+            player: 0,
+            computer: 0,
+        }
+    }
+
+    pub fn check(&self) -> bool {
+        if self.player == 3 || self.computer == 3 {
+            return true;
+        }
+        false
+    }
+
+    pub fn print_winner(&self) {
+        if self.player == 3 {
+            println!("Player wins!");
+        } else {
+            println!("Computer wins!");
+        }
     }
 }
 
